@@ -94,7 +94,7 @@
             <!-- ./col -->
             <div class="col-lg-3 col-6">
               <!-- small box -->
-              <div class="small-box bg-danger">
+              <div class="small-box bg-secondary">
                 <div class="inner">
                   <h3>  @if( App::getLocale()=='en' || session()->get('locale')=='en' ) {{count($tag)}} @else  {{getUnicodeNumber(count($tag))}}  @endif  </h3>
 
@@ -122,7 +122,7 @@
 
                 </div>
                 <div class="icon">
-                  <i class="fa fa-user"></i>
+                  <i class="fa fa-user-circle"></i>
                 </div>
                 <a href="{{route('testimonial.index')}}" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
               </div>
@@ -130,7 +130,7 @@
             <!-- ./col -->
             <div class="col-lg-3 col-6">
               <!-- small box -->
-              <div class="small-box bg-warning">
+              <div class="small-box bg-light">
                 <div class="inner">
                   <h3> @if( App::getLocale()=='en' || session()->get('locale')=='en' ) {{count($slider)}} @else  {{getUnicodeNumber(count($slider))}}  @endif  </h3>
 
@@ -147,7 +147,7 @@
             <!-- ./col -->
             <div class="col-lg-3 col-6">
               <!-- small box -->
-              <div class="small-box bg-success">
+              <div class="small-box bg-dark">
                 <div class="inner">
                   <h3> @if( App::getLocale()=='en' || session()->get('locale')=='en' ) {{ count($gallery) }} @else  {{getUnicodeNumber(count($gallery))}}  @endif  </h3>
 
@@ -164,7 +164,7 @@
             <!-- ./col -->
             <div class="col-lg-3 col-6">
               <!-- small box -->
-              <div class="small-box bg-info">
+              <div class="small-box bg-primary">
                 <div class="inner">
                   <h3> @if( App::getLocale()=='en' || session()->get('locale')=='en' ) {{ count($users) }} @else  {{getUnicodeNumber( count($users) )}}  @endif  </h3>
 
@@ -173,7 +173,7 @@
                   </strong>
                 </div>
                 <div class="icon">
-                  <i class=" fa fa-user-circle"></i>
+                  <i class=" fa fa-users"></i>
                 </div>
                 <a href="{{route('user.index')}}" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
               </div>
