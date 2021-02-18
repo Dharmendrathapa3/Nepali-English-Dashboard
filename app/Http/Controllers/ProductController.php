@@ -38,9 +38,10 @@ class ProductController extends Controller
     public function create()
     {
         $text = 'Add';
-        $productcatgeory = ProductCategory::all();
+        $productcatgeories =ProductCategory::with(['childrenCategories'])->where('parent', null)->get();
         $products = null;
-        return view('CMS/Product/form', compact('text', 'products', 'productcatgeory'));
+        $arrya[]=null;
+        return view('CMS/Product/form', compact('text', 'products', 'productcatgeories','arrya'));
     }
 
     /**
@@ -52,6 +53,7 @@ class ProductController extends Controller
     public function store(Request $request)
     {
 
+       
         $request->validate([
             'title' => 'required'
         ]);
@@ -96,9 +98,15 @@ class ProductController extends Controller
     public function edit($id)
     {
         $text = 'Edit';
-        $productcatgeory = ProductCategory::all();
+        $productcatgeories =ProductCategory::with(['childrenCategories'])->where('parent', null)->get();
+        $forcatid =ProductCategory::all();
+        $arrya = [];
+        foreach ($forcatid as $value) {
+           $arrya[]=$value->id;
+        }
+        // dd($id_arrya);
         $products = Product::find($id);
-        return view('CMS/Product/form', compact('text', 'products', 'productcatgeory'));
+        return view('CMS/Product/form', compact('text', 'products', 'productcatgeories','arrya'));
     }
 
     /**
@@ -151,12 +159,13 @@ class ProductController extends Controller
     {
         // dd($request->keyword)
 
-        $products = Product::join('product_categories', 'product_categories.id','=','products.category_id')
+        $products = Product::join('product_categories', 'product_categories.id', '=', 'products.category_id')
             ->orwhere('product_categories.name', 'like', '%' . $request->keyword . '%')
             ->orwhere('products.title', 'like', '%' . $request->keyword . '%')->paginate(10);
-          
-      
+
+
 
         return view('CMS/Product/show', compact('products'));
     }
+
 }

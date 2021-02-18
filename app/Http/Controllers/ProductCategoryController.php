@@ -40,7 +40,7 @@ class ProductCategoryController extends Controller
 
         $productcatgeory = ProductCategory::with(['childrenCategories'])->where('parent', null)->get();
         $procat = null;
-       
+
         return view('CMS/Product/Category/form', compact('text', 'productcatgeory'));
     }
 
@@ -93,7 +93,8 @@ class ProductCategoryController extends Controller
         $text = 'Edit';
         $productcatgeory = ProductCategory::with(['child'])->where('parent', null)->get();
 
-        $procat = ProductCategory::find($id);
+        $procat = ProductCategory::with(['categories'])->find($id);
+
         return view('CMS/Product/Category/form', compact('text', 'productcatgeory', 'procat'));
     }
 
@@ -165,11 +166,5 @@ class ProductCategoryController extends Controller
     // }
 
 
-    public function TreeView()
-    {
-        $categories = ProductCategory::whereNull('parent')
-        ->with('childrenCategories')
-        ->get();
-    return view('Tree/categories', compact('categories'));
-    }
+
 }

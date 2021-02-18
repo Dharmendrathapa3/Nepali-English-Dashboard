@@ -104,7 +104,6 @@ class RoleController extends Controller
             $arrya[] = $value->id;
         }
 
-
         $data = [
 
             'text' => $text,

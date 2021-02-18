@@ -33,7 +33,7 @@
       <div class="card card-primary">
 
         <div class="card-header">
-          <h3 class="card-title">{{__('Product')}}  @if(App::getLocale()=='en' || session()->get('locale')=='en') {{ $text }} @else {{getvariable($text)}} @endif </h3>
+          <h3 class="card-title">{{__('Product')}} @if(App::getLocale()=='en' || session()->get('locale')=='en') {{ $text }} @else {{getvariable($text)}} @endif </h3>
         </div>
 
         <form action=" @if($text=='Edit') {{route('product.update',@$products->id)}} @else {{route('product.store')}} @endif" method="POST" enctype="multipart/form-data">
@@ -66,15 +66,24 @@
 
             <div class="col-md-5">
               <div class="card-body">
-              <div class="form-group col-lg-6" style="width:max-content;">
+                <div class="form-group col-lg-6" style="width:max-content;">
                   <label>{{__('Parent')}} {{__('Product')}} {{__('Category')}}: </label>
                   <select class="form-control select2" style="width: 100%;" id="category_id" name="category_id">
                     <option selected="selected" disabled>Select Product Category</option>
 
-                    @foreach($productcatgeory as $row)
-                    <option value="{{$row->id}}" > {{@$row->name}}</option>
+                    @if(count($productcatgeories)>0)
+
+                    @foreach ($productcatgeories as $category)
+
+
+                    <option value="{{$category->id}}" @if(in_array ($category->id , $arrya)) selected @endif > {{ $category->name }} </option>
+
+                    @include('Tree.child_category', ['child_category' => $category->childrenCategories,'arrya'=>@$arrya,'a'=>2])
+
+
                     @endforeach
 
+                    @endif
                   </select>
                 </div>
 
